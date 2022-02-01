@@ -14,7 +14,7 @@ botaoAdicionar.addEventListener("click", function (event) {
   let pacienteTr = montaTr(paciente);
 
   let erros = validaPaciente(paciente);
-  console.log(erros)
+  console.log(erros);
 
   if (erros.length > 0) {
     exibeMensagensDeErro(erros);
@@ -22,22 +22,30 @@ botaoAdicionar.addEventListener("click", function (event) {
   }
 
   function exibeMensagensDeErro(erros) {
-    var ul = document.querySelector('#mensagem-erro');
-    ul.innerHTML = ""
+    var ul = document.querySelector("#mensagem-erro");
+    ul.innerHTML = "";
     erros.forEach(function (erro) {
       var li = document.createElement("li");
       li.textContent = erro;
       ul.appendChild(li);
     });
   }
-  
+
   let tabela = document.querySelector("#tabela-pacientes"); //adiciona paciente na tabela
   tabela.appendChild(pacienteTr);
 
+  adicionaPacienteNaTabela(paciente);
+
   form.reset();
   var mensagemDeErro = document.querySelector("#mensagem-erro");
-  mensagemDeErro.innerHTML = '';
+  mensagemDeErro.innerHTML = "";
 });
+
+function adicionaPacienteNaTabela(paciente) {
+  let pacienteTr = montaTr(paciente);
+  let tabela = document.querySelector("#tabela-pacientes"); //adiciona paciente na tabela
+  tabela.appendChild(pacienteTr);
+}
 
 function obtemPacienteDoFormulario(form) {
   var paciente = {
@@ -87,11 +95,11 @@ function montaTr(paciente) {
 
 function validaPaciente(paciente) {
   var error = [];
-  if(paciente.nome.length == 0) error.push("Nome obrigatório!");
+  if (paciente.nome.length == 0) error.push("Nome obrigatório!");
   if (!validaPeso(paciente.peso)) error.push("Peso inválido!");
-  if(paciente.peso.length == 0) error.push("Peso obrigatório!");
+  if (paciente.peso.length == 0) error.push("Peso obrigatório!");
   if (!validaAltura(paciente.altura)) error.push("Altura inválida!");
-  if(paciente.altura.length == 0) error.push("Altura obrigatório!");
-  if(paciente.gordura.length == 0 ) error.push("Gordura obrigatório!");
+  if (paciente.altura.length == 0) error.push("Altura obrigatório!");
+  if (paciente.gordura.length == 0) error.push("Gordura obrigatório!");
   return error;
 }
